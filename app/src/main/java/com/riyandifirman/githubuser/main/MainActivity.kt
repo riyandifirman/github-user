@@ -70,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                 // fungsi untuk menangani ketika tombol search di klik
                 override fun onQueryTextSubmit(query: String): Boolean {
                     // panggil method getSearchData() dari MainViewModel untuk mendapatkan data user dari github api dengan query yang diinputkan
-                    viewModel.setUser(query)
+                    viewModel.getSearchUser(query)
+                    showLoading(true)
 
                     // hilangkan keyboard
                     searchView.clearFocus()
