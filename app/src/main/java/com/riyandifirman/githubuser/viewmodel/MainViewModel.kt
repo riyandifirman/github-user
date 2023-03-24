@@ -14,11 +14,13 @@ import retrofit2.Response
 
 class MainViewModel : ViewModel() {
 
+    // companion object digunakan untuk membuat variabel yang dapat diakses tanpa harus membuat objek
     companion object {
         private const val ERROR = "Failure"
         private const val USERNAME = "riyandi"
     }
 
+    // fungsi yang akan dijalankan pertama kali ketika kelas ini diinisiasi
     init {
         setUser(USERNAME)
     }
@@ -26,25 +28,32 @@ class MainViewModel : ViewModel() {
     val _listUser = MutableLiveData<ArrayList<User>>()
     val listUser: LiveData<ArrayList<User>> = _listUser
 
+    // fungsi untuk mengambil data dari API
     fun setUser(query: String) {
+        // memanggil fungsi getUsers pada ApiConfig untuk mengambil data dengan parameter USERNAME
         val client = ApiConfig.getApiService().getUsers(USERNAME)
         client.enqueue(object : Callback<GithubResponse> {
+            // Jika berhasil
             override fun onResponse(call: Call<GithubResponse>, response: Response<GithubResponse>) {
                 if (response.isSuccessful) {
+                    // mengisi data ke dalam _listUser dengan data yang didapat dari API
                     _listUser.postValue(response.body()?.items)
                 }
             }
 
+            // Jika gagal
             override fun onFailure(call: Call<GithubResponse>, t: Throwable) {
                 Log.d(ERROR, t.message.toString())
             }
         })
     }
 
+    // fungsi untuk mengembalikan data
     fun getUser(): LiveData<ArrayList<User>> = listUser
 
+    // fungsi untuk mengambil data dari API
     fun getSearchUser(query: String) {
-        // Inisiasi Retrofit
+        // memanggil fungsi getSearchData pada ApiConfig untuk mengambil data dengan parameter query
         val client = ApiConfig.getApiService().getSearchData(query)
         client.enqueue(object : Callback<SearchResponse> {
             // Jika berhasil
@@ -53,6 +62,7 @@ class MainViewModel : ViewModel() {
                 response: Response<SearchResponse>
             ) {
                 if (response.isSuccessful) {
+                    // mengisi data ke dalam _listUser dengan data yang didapat dari API
                     val listUser = response.body()?.items
                     if (listUser != null) {
                         _listUser.postValue(listUser as ArrayList<User>?)

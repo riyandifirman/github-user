@@ -14,23 +14,29 @@ class FollowingViewModel : ViewModel() {
     var _listFollowing = MutableLiveData<ArrayList<User>>()
     val listFollowing: LiveData<ArrayList<User>> = _listFollowing
 
+    // fungsi untuk mengambil data dari API
     fun setFollowing(username : String) {
+        // memanggil fungsi getFollowingUser pada ApiConfig untuk mengambil data dengan parameter username
         val client = ApiConfig.getApiService().getFollowingUser(username)
         client.enqueue(object : Callback<ArrayList<User>> {
+            // jika berhasil
             override fun onResponse(
                 call: Call<ArrayList<User>>,
                 response: Response<ArrayList<User>>
             ) {
                 if (response.isSuccessful) {
+                    // mengisi data ke dalam _listFollowing dengan data yang didapat dari API
                     _listFollowing.postValue(response.body())
                 }
             }
 
+            // jika gagal
             override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
                 Log.d("ERROR", t.message.toString())
             }
         })
     }
 
+    // fungsi untuk mengembalikan data
     fun getFollowing(): LiveData<ArrayList<User>> = listFollowing
 }

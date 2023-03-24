@@ -15,6 +15,7 @@ class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
     private lateinit var viewModel: DetailUserViewModel
 
+    // companion object digunakan untuk membuat variabel yang dapat diakses dari mana saja
     companion object {
         const val EXTRA_USERNAME = "extra_username"
     }
@@ -24,15 +25,21 @@ class DetailUserActivity : AppCompatActivity() {
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // mengambil data dari intent yang dikirimkan dari MainActivity
         val username = intent.getStringExtra(EXTRA_USERNAME)
+
+        // membuat bundle untuk mengirimkan data ke fragment
         val bundle = Bundle()
         bundle.putString(EXTRA_USERNAME, username)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-            DetailUserViewModel::class.java)
+        // menginisialisasi viewModel
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
+
         if (username != null) {
             viewModel.setDetailUser(username)
         }
+
+        // memanggil fungsi getDetailUser() yang ada di viewModel untuk mengambil data dari API
         viewModel.getDetailUser().observe(this) {
             if (it != null) {
                 binding.apply {
@@ -44,18 +51,22 @@ class DetailUserActivity : AppCompatActivity() {
                     tvFollowers.text = "${it.followers} Followers"
                     tvFollowing.text = "${it.following} Following"
                 }
+                // memanggil fungsi showLoading() untuk menghilangkan progress bar
                 showLoading(false)
             }
         }
 
+        // menginisialisasi adapter untuk view pager
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, bundle)
         val viewPager: ViewPager = binding.viewPager
+        // menghubungkan view pager dengan tab layout
         binding.apply {
             viewPager.adapter = sectionsPagerAdapter
             tabLayout.setupWithViewPager(viewPager)
         }
     }
 
+    // fungsi untuk menampilkan progress bar
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             // jika isLoading true maka progress bar akan muncul

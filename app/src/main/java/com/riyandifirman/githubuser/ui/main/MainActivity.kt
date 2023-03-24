@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
 
+        // set on item click callback untuk adapter
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
+            // fungsi untuk menangani ketika item di klik
             override fun onItemClicked(data: User) {
                 // panggil DetailUserActivity dengan membawa data user
                 val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
@@ -40,9 +42,10 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-            MainViewModel::class.java)
+        // inisialisasi MainViewModel
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
+        // inisialisasi recycle view
         binding.apply {
             recycleView.layoutManager = LinearLayoutManager(this@MainActivity)
             recycleView.setHasFixedSize(true)
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // fungsi untuk menampilkan progress bar
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             // jika isLoading true maka progress bar akan muncul
@@ -68,10 +72,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // fungsi untuk menampilkan option menu search
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
 
+        // inisialisasi search manager dan search view
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
 
