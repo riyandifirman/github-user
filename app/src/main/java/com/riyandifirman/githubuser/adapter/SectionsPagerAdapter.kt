@@ -1,6 +1,7 @@
 package com.riyandifirman.githubuser.adapter
 
 import android.content.Context
+import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -9,7 +10,9 @@ import com.riyandifirman.githubuser.R
 import com.riyandifirman.githubuser.ui.detail.FollowersFragment
 import com.riyandifirman.githubuser.ui.detail.FollowingFragment
 
-class SectionsPagerAdapter(private val mContext: Context, fManager: FragmentManager) : FragmentPagerAdapter(fManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionsPagerAdapter(private val mContext: Context, fManager: FragmentManager, data: Bundle) : FragmentPagerAdapter(fManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+    private var fragmentBundle: Bundle = data
 
     @StringRes
     private val TAB_TITLES = intArrayOf(R.string.tab_a, R.string.tab_b)
@@ -24,6 +27,7 @@ class SectionsPagerAdapter(private val mContext: Context, fManager: FragmentMana
             0 -> fragment = FollowersFragment()
             1 -> fragment = FollowingFragment()
         }
+        fragment?.arguments = fragmentBundle
         return fragment as Fragment
     }
 

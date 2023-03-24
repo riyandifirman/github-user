@@ -25,6 +25,8 @@ class DetailUserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val username = intent.getStringExtra(EXTRA_USERNAME)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_USERNAME, username)
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             DetailUserViewModel::class.java)
@@ -46,7 +48,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, bundle)
         val viewPager: ViewPager = binding.viewPager
         binding.apply {
             viewPager.adapter = sectionsPagerAdapter
