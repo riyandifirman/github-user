@@ -3,4 +3,6 @@
     <string name="name">Username</string>
     <string name="search">Search</string>
     <string name="search_hint">Search username Github here</string>
+    <string name="tab_a">Followers</string>
+    <string name="tab_b">Following</string>
 </resources>

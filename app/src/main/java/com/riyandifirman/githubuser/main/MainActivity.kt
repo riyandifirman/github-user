@@ -2,6 +2,7 @@ package com.riyandifirman.githubuser.main
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,8 +11,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riyandifirman.githubuser.R
+import com.riyandifirman.githubuser.User
 import com.riyandifirman.githubuser.UserAdapter
 import com.riyandifirman.githubuser.databinding.ActivityMainBinding
+import com.riyandifirman.githubuser.detail.DetailUserActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +29,15 @@ class MainActivity : AppCompatActivity() {
 
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
+
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: User) {
+                // panggil DetailUserActivity dengan membawa data user
+                val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
+                intent.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+                startActivity(intent)
+            }
+        })
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
