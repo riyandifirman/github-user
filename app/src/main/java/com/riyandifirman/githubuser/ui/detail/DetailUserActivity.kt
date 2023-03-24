@@ -1,13 +1,14 @@
-package com.riyandifirman.githubuser.detail
+package com.riyandifirman.githubuser.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.riyandifirman.githubuser.R
+import com.riyandifirman.githubuser.adapter.SectionsPagerAdapter
 import com.riyandifirman.githubuser.databinding.ActivityDetailUserBinding
+import com.riyandifirman.githubuser.viewmodel.DetailUserViewModel
 
 class DetailUserActivity : AppCompatActivity() {
 
@@ -25,7 +26,8 @@ class DetailUserActivity : AppCompatActivity() {
 
         val username = intent.getStringExtra(EXTRA_USERNAME)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            DetailUserViewModel::class.java)
         if (username != null) {
             viewModel.setDetailUser(username)
         }
@@ -40,6 +42,7 @@ class DetailUserActivity : AppCompatActivity() {
                     tvFollowers.text = "${it.followers} Followers"
                     tvFollowing.text = "${it.following} Following"
                 }
+                showLoading(false)
             }
         }
 
@@ -48,6 +51,16 @@ class DetailUserActivity : AppCompatActivity() {
         binding.apply {
             viewPager.adapter = sectionsPagerAdapter
             tabLayout.setupWithViewPager(viewPager)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            // jika isLoading true maka progress bar akan muncul
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            // jika isLoading false maka progress bar akan hilang
+            binding.progressBar.visibility = View.GONE
         }
     }
 }

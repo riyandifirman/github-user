@@ -1,4 +1,4 @@
-package com.riyandifirman.githubuser.main
+package com.riyandifirman.githubuser.ui.main
 
 import android.app.SearchManager
 import android.content.Context
@@ -12,9 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riyandifirman.githubuser.R
 import com.riyandifirman.githubuser.User
-import com.riyandifirman.githubuser.UserAdapter
+import com.riyandifirman.githubuser.adapter.UserAdapter
 import com.riyandifirman.githubuser.databinding.ActivityMainBinding
-import com.riyandifirman.githubuser.detail.DetailUserActivity
+import com.riyandifirman.githubuser.ui.detail.DetailUserActivity
+import com.riyandifirman.githubuser.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +40,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            MainViewModel::class.java)
 
         binding.apply {
             recycleView.layoutManager = LinearLayoutManager(this@MainActivity)

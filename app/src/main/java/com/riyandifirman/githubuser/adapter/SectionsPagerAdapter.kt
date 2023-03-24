@@ -1,15 +1,13 @@
-package com.riyandifirman.githubuser.detail
+package com.riyandifirman.githubuser.adapter
 
 import android.content.Context
-import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.riyandifirman.githubuser.R
+import com.riyandifirman.githubuser.ui.detail.FollowersFragment
+import com.riyandifirman.githubuser.ui.detail.FollowingFragment
 
 class SectionsPagerAdapter(private val mContext: Context, fManager: FragmentManager) : FragmentPagerAdapter(fManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 

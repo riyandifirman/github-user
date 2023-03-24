@@ -1,4 +1,4 @@
-package com.riyandifirman.githubuser.detail
+package com.riyandifirman.githubuser.ui.detail
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package com.riyandifirman.githubuser.detail
+package com.riyandifirman.githubuser.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
