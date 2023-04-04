@@ -94,4 +94,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
+    <ToggleButton
+        android:id="@+id/toggle"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_margin="28dp"
+        android:textOn=""
+        android:textOff=""
+        android:background="@drawable/fav_toggle"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

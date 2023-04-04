@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
                 // panggil DetailUserActivity dengan membawa data user
                 val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
                 intent.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+                intent.putExtra(DetailUserActivity.EXTRA_ID, data.id)
                 startActivity(intent)
             }
         })
