@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.riyandifirman.githubuser.User
 import com.riyandifirman.githubuser.adapter.UserAdapter
 import com.riyandifirman.githubuser.databinding.ActivityMainBinding
 import com.riyandifirman.githubuser.ui.detail.DetailUserActivity
+import com.riyandifirman.githubuser.ui.favorite.FavoriteActivity
 import com.riyandifirman.githubuser.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, DetailUserActivity::class.java)
                 intent.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
                 intent.putExtra(DetailUserActivity.EXTRA_ID, data.id)
+                intent.putExtra(DetailUserActivity.EXTRA_AVATAR, data.avatar_url)
                 startActivity(intent)
             }
         })
@@ -108,5 +111,16 @@ class MainActivity : AppCompatActivity() {
 
         // fungsi untuk menangani ketika tombol close di klik
         return super.onCreateOptionsMenu(menu)
+    }
+
+    // fungsi untuk menangani ketika item di option menu favorit di klik
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite -> {
+                val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

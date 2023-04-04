@@ -5,4 +5,5 @@
     <string name="search_hint">Search username Github here</string>
     <string name="tab_a">Followers</string>
     <string name="tab_b">Following</string>
+    <string name="favorite">Favorite</string>
 </resources>

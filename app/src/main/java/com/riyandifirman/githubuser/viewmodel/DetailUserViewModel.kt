@@ -57,9 +57,9 @@ class DetailUserViewModel(application: Application) : AndroidViewModel(applicati
     fun getDetailUser(): LiveData<DetailUserResponse> = user
 
     // fungsi untuk menambahkan data user favorit ke dalam database
-    fun insertFavoriteUser(username: String, id: Int) {
+    fun insertFavoriteUser(username: String, id: Int, avatarUrl: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            var user = FavoriteUser(username, id)
+            var user = FavoriteUser(username, id, avatarUrl)
             userDao?.insertFavoriteUser(user)
         }
     }

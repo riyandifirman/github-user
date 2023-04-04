@@ -24,6 +24,7 @@ class DetailUserActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_USERNAME = "extra_username"
         const val EXTRA_ID = "extra_id"
+        const val EXTRA_AVATAR = "extra_avatar"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class DetailUserActivity : AppCompatActivity() {
         // mengambil data dari intent yang dikirimkan dari MainActivity
         val username = intent.getStringExtra(EXTRA_USERNAME)
         val id = intent.getIntExtra(EXTRA_ID, 0)
+        val avatar = intent.getStringExtra(EXTRA_AVATAR)
 
         // membuat bundle untuk mengirimkan data ke fragment
         val bundle = Bundle()
@@ -83,7 +85,9 @@ class DetailUserActivity : AppCompatActivity() {
             isCheck = !isCheck
             if (isCheck) {
                 if (username != null) {
-                    viewModel.insertFavoriteUser(username, id)
+                    if (avatar != null) {
+                        viewModel.insertFavoriteUser(username, id, avatar)
+                    }
                 }
             } else {
                 viewModel.deleteFavoriteUser(id)
