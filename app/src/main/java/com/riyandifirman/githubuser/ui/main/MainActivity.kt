@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,15 +17,18 @@ import com.riyandifirman.githubuser.R
 import com.riyandifirman.githubuser.User
 import com.riyandifirman.githubuser.adapter.UserAdapter
 import com.riyandifirman.githubuser.databinding.ActivityMainBinding
+import com.riyandifirman.githubuser.settings.SettingsPreferences
 import com.riyandifirman.githubuser.ui.detail.DetailUserActivity
 import com.riyandifirman.githubuser.ui.favorite.FavoriteActivity
+import com.riyandifirman.githubuser.ui.setting.SettingActivity
 import com.riyandifirman.githubuser.viewmodel.MainViewModel
+import com.riyandifirman.githubuser.viewmodel.SettingsViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: UserAdapter
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +52,16 @@ class MainActivity : AppCompatActivity() {
         })
 
         // inisialisasi MainViewModel
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, MainViewModel.Factory(SettingsPreferences(this))).get(MainViewModel::class.java)
+//        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+
+        viewModel.getTheme().observe(this) {
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         // inisialisasi recycle view
         binding.apply {
@@ -118,6 +132,10 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.favorite -> {
                 val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.settings -> {
+                val intent = Intent(this, SettingActivity::class.java)
                 startActivity(intent)
             }
         }

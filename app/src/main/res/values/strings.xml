@@ -6,4 +6,7 @@
     <string name="tab_a">Followers</string>
     <string name="tab_b">Following</string>
     <string name="favorite">Favorite</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="settings">Settings</string>
 </resources>

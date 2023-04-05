@@ -1,18 +1,17 @@
 package com.riyandifirman.githubuser.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.riyandifirman.githubuser.ApiConfig
 import com.riyandifirman.githubuser.User
 import com.riyandifirman.githubuser.response.GithubResponse
 import com.riyandifirman.githubuser.response.SearchResponse
+import com.riyandifirman.githubuser.settings.SettingsPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val preferences: SettingsPreferences) : ViewModel() {
 
     // companion object digunakan untuk membuat variabel yang dapat diakses tanpa harus membuat objek
     companion object {
@@ -75,5 +74,11 @@ class MainViewModel : ViewModel() {
                 Log.e("MainViewModel", "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun getTheme() = preferences.getTheme().asLiveData()
+
+    class Factory(private val preferences: SettingsPreferences) : ViewModelProvider.NewInstanceFactory() {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T = MainViewModel(preferences) as T
     }
 }

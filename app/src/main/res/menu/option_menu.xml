@@ -12,4 +12,9 @@
         android:icon="@drawable/ic_baseline_menu_favorite_24"
         android:title="@string/favorite"
         app:showAsAction="collapseActionView|always" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/settings"
+        app:showAsAction="collapseActionView|always" />
 </menu>
