@@ -2,6 +2,7 @@ package com.riyandifirman.githubuser.viewmodel
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -48,7 +49,8 @@ class DetailUserViewModel(application: Application) : AndroidViewModel(applicati
 
             // jika gagal
             override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                Log.d("ERROR", t.message.toString())
+                // menampilkan pesan error dengan toast
+                Toast.makeText(getApplication(), t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }

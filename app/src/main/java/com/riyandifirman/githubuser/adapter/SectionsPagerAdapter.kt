@@ -19,9 +19,7 @@ class SectionsPagerAdapter(private val mContext: Context, fManager: FragmentMana
     private val TAB_TITLES = intArrayOf(R.string.tab_a, R.string.tab_b)
 
     // fungsi untuk mengembalikan jumlah tab
-    override fun getCount(): Int {
-        return 2
-    }
+    override fun getCount(): Int = TAB_TITLES.size
 
     // fungsi untuk mengembalikan fragment yang akan ditampilkan pada tab
     override fun getItem(position: Int): Fragment {

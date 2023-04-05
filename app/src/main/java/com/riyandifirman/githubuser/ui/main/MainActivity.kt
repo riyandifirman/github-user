@@ -80,15 +80,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // fungsi untuk menampilkan progress bar
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            // jika isLoading true maka progress bar akan muncul
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            // jika isLoading false maka progress bar akan hilang
-            binding.progressBar.visibility = View.GONE
-        }
-    }
+    private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
 
     // fungsi untuk menampilkan option menu search
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

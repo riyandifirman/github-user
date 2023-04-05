@@ -1,5 +1,6 @@
 package com.riyandifirman.githubuser.ui.detail
 
+import android.nfc.NfcAdapter.EXTRA_ID
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -19,13 +20,6 @@ class DetailUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailUserBinding
     private lateinit var viewModel: DetailUserViewModel
-
-    // companion object digunakan untuk membuat variabel yang dapat diakses dari mana saja
-    companion object {
-        const val EXTRA_USERNAME = "extra_username"
-        const val EXTRA_ID = "extra_id"
-        const val EXTRA_AVATAR = "extra_avatar"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,13 +100,12 @@ class DetailUserActivity : AppCompatActivity() {
     }
 
     // fungsi untuk menampilkan progress bar
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            // jika isLoading true maka progress bar akan muncul
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            // jika isLoading false maka progress bar akan hilang
-            binding.progressBar.visibility = View.GONE
-        }
+    private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
+
+    // companion object digunakan untuk membuat variabel yang dapat diakses dari mana saja
+    companion object {
+        const val EXTRA_USERNAME = "extra_username"
+        const val EXTRA_ID = "extra_id"
+        const val EXTRA_AVATAR = "extra_avatar"
     }
 }

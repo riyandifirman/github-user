@@ -14,10 +14,7 @@ import retrofit2.Response
 class MainViewModel(private val preferences: SettingsPreferences) : ViewModel() {
 
     // companion object digunakan untuk membuat variabel yang dapat diakses tanpa harus membuat objek
-    companion object {
-        private const val ERROR = "Failure"
-        private const val USERNAME = "riyandi"
-    }
+
 
     // fungsi yang akan dijalankan pertama kali ketika kelas ini diinisiasi
     init {
@@ -80,5 +77,10 @@ class MainViewModel(private val preferences: SettingsPreferences) : ViewModel() 
 
     class Factory(private val preferences: SettingsPreferences) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T = MainViewModel(preferences) as T
+    }
+
+    companion object {
+        private const val ERROR = "Failure"
+        private const val USERNAME = "riyandi"
     }
 }
