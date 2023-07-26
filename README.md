@@ -9,7 +9,7 @@ Features that must be present in the app:
 
 <b> 1. Search User </b> <br>
 - Display a list of user data from the API using RecyclerView with minimal data for avatar photos and usernames.
-- User search using data from the API runs well.
+- User search using data from the API runs well
 - Users can see the detail page of the search list results.
 
 <b> 2. Detail User </b> <br> 
